@@ -37,19 +37,20 @@ namespace MagicVilla_Web.Controllers
                 LoginResponseDTO model = JsonConvert.DeserializeObject<LoginResponseDTO>(Convert.ToString(response.Result));
 
 
-                var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
-                identity.AddClaim(new Claim(ClaimTypes.Name, model.user.userName));
-                identity.AddClaim(new Claim(ClaimTypes.Role, model.user.role));
-                var principal = new ClaimsPrincipal(identity);
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
-                //var handler = new JwtSecurityTokenHandler();
-                //var jwt = handler.ReadJwtToken(model.token);
-
                 //var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
-                //identity.AddClaim(new Claim(ClaimTypes.Name, jwt.Claims.FirstOrDefault(u => u.Type == "name").Value));
-                //identity.AddClaim(new Claim(ClaimTypes.Role, jwt.Claims.FirstOrDefault(u => u.Type == "role").Value));
+                //identity.AddClaim(new Claim(ClaimTypes.Name, model.user.userName));
+                //identity.AddClaim(new Claim(ClaimTypes.Role, model.user.role));
                 //var principal = new ClaimsPrincipal(identity);
                 //await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+                
+                var handler = new JwtSecurityTokenHandler();
+                var jwt = handler.ReadJwtToken(model.token);
+
+                var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
+                identity.AddClaim(new Claim(ClaimTypes.Name, jwt.Claims.FirstOrDefault(u => u.Type == "unique_name").Value));
+                identity.AddClaim(new Claim(ClaimTypes.Role, jwt.Claims.FirstOrDefault(u => u.Type == "role").Value));
+                var principal = new ClaimsPrincipal(identity);
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
 
                 HttpContext.Session.SetString(SD.SessionToken, model.token);

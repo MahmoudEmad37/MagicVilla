@@ -22,7 +22,7 @@ namespace MagicVilla_Web.Services
                 apiType = SD.ApiType.POST,
                 data = dto,
                 token = token,
-                url = villaUrl + "/api/VillaAPI/CreateVilla"
+                url = villaUrl + "/api/v1/VillaAPI/CreateVilla"
             });
         }
 
@@ -32,7 +32,7 @@ namespace MagicVilla_Web.Services
             {
                 apiType = SD.ApiType.DELETE,
                 token = token,
-                url = villaUrl + "/api/VillaAPI/DeleteVilla/" + id
+                url = villaUrl + "/api/v1/VillaAPI/DeleteVilla/" + id
             });
         }
 
@@ -42,7 +42,7 @@ namespace MagicVilla_Web.Services
             {
                 apiType = SD.ApiType.GET,
                 token = token,
-                url = villaUrl + "/api/VillaAPI/GetVillas"
+                url = villaUrl + "/api/v1/VillaAPI/GetVillas"
             });
         }
 
@@ -52,7 +52,7 @@ namespace MagicVilla_Web.Services
             {
                 apiType = SD.ApiType.GET,
                 token = token,
-                url = villaUrl + "/api/VillaAPI/GetVillaById/" + id
+                url = villaUrl + "/api/v1/VillaAPI/GetVillaById/" + id
             });
         }
 
@@ -63,7 +63,7 @@ namespace MagicVilla_Web.Services
                 apiType = SD.ApiType.PUT,
                 data = dto,
                 token=token,
-                url = villaUrl + "/api/VillaAPI/UpdateVilla/"+dto.id
+                url = villaUrl + "/api/v1/VillaAPI/UpdateVilla/" + dto.id
             });
         }
     }
